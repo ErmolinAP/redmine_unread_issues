@@ -1,0 +1,11 @@
+# German strings go here for Rails i18n
+de:
+  unread_issues_label_filter_unread: "Ungelesene Ausgaben"
+  unread_issues_label_filter_updated: "Ungelesenes Problem-Update"
+  unread_issues_label_unread: "Benutzer, die gelesen haben"
+  unread_issues_label_read: "Ausgaben lesen"
+  unread_issues_label_tab: "Datum der Betrachtung"
+  unread_issues_label_date: "Wählen Sie ein Datumsformat"
+  unread_issues_label_word: "Zeitliche Distanz in Worten"
+  unread_issues_label_date_default: "Nur Datum"
+  unread_issues_label_date_time: "Datum und Uhrzeit"

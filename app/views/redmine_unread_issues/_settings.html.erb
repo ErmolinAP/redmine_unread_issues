@@ -1,0 +1,8 @@
+<fieldset>
+    <div class="evo-theme-sel">
+        <p>
+            <label><%= t('unread_issues_label_date') %></label>
+            <%= select_tag 'settings[redmine_unread_issues_date]', options_for_select([[t('unread_issues_label_word'), "distance_of_time_in_words"], [t('unread_issues_label_date_default'), "format_date"], [t('unread_issues_label_date_time'), "format_time"]], @settings['redmine_unread_issues_date']) %>
+        </p>
+    </div>
+</fieldset>

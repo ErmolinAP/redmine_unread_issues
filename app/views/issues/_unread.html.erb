@@ -1,0 +1,30 @@
+<table class="list">
+  <thead>
+  <tr>
+    <th><%= t('label_user') %></th>
+    <th><%= t('unread_issues_label_tab') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @issue.read_issues.includes(:user).references(:user).each do |ri| %>
+    <% next if ri.user.anonymous? %>
+    <tr>
+      <td><%= link_to ri.user.name, user_path(ri.user) %></td>
+      <td>
+        <% set = Setting.plugin_redmine_unread_issues['redmine_unread_issues_date'] %>
+        <% if set == 'distance_of_time_in_words' %>
+          <%= distance_of_time_in_words(Time.now, ri.read_at) %>
+        <% end %>
+
+        <% if set == 'format_date' %>
+          <%= format_date(ri.read_at) %>
+        <% end %>
+
+        <% if set == 'format_time' %>
+          <%= format_time(ri.read_at) %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,11 @@
+#  Portugues - Portugal strings go here for Rails i18n
+pt:
+  unread_issues_label_filter_unread: "Problemas não lidos"
+  unread_issues_label_filter_updated: "Atualização de problema não lido"
+  unread_issues_label_unread: "Usuários que leram"
+  unread_issues_label_read: "Ler problemas"
+  unread_issues_label_tab: "Data visualizada"
+  unread_issues_label_date: "Escolha um formato de data"
+  unread_issues_label_word: "Distância de tempo nas palavras"
+  unread_issues_label_date_default: "Única data"
+  unread_issues_label_date_time: "Data e hora"

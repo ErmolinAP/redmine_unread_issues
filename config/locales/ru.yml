@@ -1,0 +1,12 @@
+# Russian strings go here for Rails i18n
+ru:
+  unread_issues_label_filter_unread: "Непрочитанные задачи"
+  unread_issues_label_filter_updated: "Непрочитанные обновленные задачи"
+  unread_issues_label_unread: "Просмотры"
+  unread_issues_label_read: "Прочитанные задачи"
+  unread_issues_label_tab: "Дата просмотра"
+  unread_issues_label_date: "Выберите формат даты"
+  unread_issues_label_word: "Расстояние времени словами"
+  unread_issues_label_date_default: "Только дата"
+  unread_issues_label_date_time: "Дата и время"
+

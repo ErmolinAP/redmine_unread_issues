@@ -1,0 +1,11 @@
+# Chinese strings go here for Rails i18n
+zh:
+  unread_issues_label_filter_unread: "未读问题"
+  unread_issues_label_filter_updated: "未读问题更新"
+  unread_issues_label_unread: "已阅读过的用户"
+  unread_issues_label_read: "阅读问题"
+  unread_issues_label_tab: "查看日期"
+  unread_issues_label_date: "选择日期格式"
+  unread_issues_label_word: "以文字表示的时间距离"
+  unread_issues_label_date_default: "仅日期"
+  unread_issues_label_date_time: "日期和时间"

@@ -1,0 +1,11 @@
+# Korean strings go here for Rails i18n
+ko:
+  unread_issues_label_filter_unread: "읽지 않은 문제"
+  unread_issues_label_filter_updated: "읽지 않은 문제 업데이트"
+  unread_issues_label_unread: "읽어본 사용자"
+  unread_issues_label_read: "이슈 읽기"
+  unread_issues_label_tab: "본 날짜"
+  unread_issues_label_date: "날짜 형식 선택"
+  unread_issues_label_word: "단어로 표현된 시간의 거리"
+  unread_issues_label_date_default: "날짜만"
+  unread_issues_label_date_time: "날짜와 시간"

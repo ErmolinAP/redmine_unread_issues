@@ -1,0 +1,32 @@
+= redmine_unread_issue
+
+----------------------------------------
+RE-issues-read - Redmine Evolution
+----------------------------------------
+
+To install the plugin, do the following:
+
+- Copy "redmine_unread_issue" to {RAILS_APP}/plugins on your redmine path
+- bundle exec rake redmine:plugins NAME=redmine_evolution_badge RAILS_ENV=production
+- bundle exec rake redmine:plugins:migrate NAME=redmine_unread_issue RAILS_ENV=production
+- Restart Redmine
+
+---------------------------------------
+
+To uninstall the plugin, do the following:
+
+- Remove folder "redmine_unread_issue" from {RAILS_APP}/plugins on your redmine path
+- Restart Redmine
+
+---------------------------------------
+
+version '1.0.0' - 26.09.2023
+    - plugin release
+
+---------------------------------------
+
+version '1.1.0' - 03.11.2024
+
+Added a settings page with the following options:
+
+    - Format date viewed.

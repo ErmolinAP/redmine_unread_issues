@@ -1,0 +1,10 @@
+/* Redmine Evolution Unread Issues */
+/* author Roman Kharchenko */
+/* url https://redmine-evolution.com/our-plugins/ */
+/* author_url mailto:onlycssclub@gmail.com */
+
+:root {
+    --ur-red:#ff0000;
+    --ur-blue:#0000CC;
+}
+.evo-un-el {display: inline-block;width:8px;height:8px;border-radius:8px;margin:0 4px 0 0;cursor:pointer}  #gantt_here .gantt_row_task .gantt_tree_content span.read:before, #gantt_here .gantt_row_task .gantt_tree_content span.issue_read:before, .controller-my .agile-card-body .name span.read:before, .issue-board .webix_cell.issue.read span[data-update="subject"] a:before, .evo-read{display: none;}  .agile-board .issue-card.unread .name a:before, #gantt_here .gantt_row_task .gantt_tree_content span.unread:before, #gantt_here .gantt_row_task .gantt_tree_content span.issue_unread:before, .controller-my .agile-card-body .name .unread:before, .issue-board .webix_cell.issue.unread span[data-update="subject"] a:before, .evo-unread{background-color: var(--ur-red)}  .agile-board .issue-card.updated .name a:before, #gantt_here .gantt_row_task .gantt_tree_content span.updated:before, #gantt_here .gantt_row_task .gantt_tree_content span.issue_updated:before, .controller-my .agile-card-body .name span.updated:before, .issue-board .webix_cell.issue.updated span[data-update="subject"] a:before, .evo-updated{background-color: var(--ur-blue)}  .agile-board .issue-card.unread .name a:before, .agile-board .issue-card.updated .name a:before, #gantt_here .gantt_row_task .gantt_tree_content span:before, .controller-my .agile-card-body .name span:before, .issue-board .webix_cell.issue span[data-update="subject"] a:before {content: '';display: inline-flex;clear: both;width:8px;height:8px !important;visibility: visible !important;border-radius:8px;margin:0 4px 0 0;}
