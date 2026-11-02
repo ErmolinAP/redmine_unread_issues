@@ -10,3 +10,6 @@ ru:
   unread_issues_label_date_default: "Только дата"
   unread_issues_label_date_time: "Дата и время"
 
+  unread_issues_hint_counter_assigned: "Задачи, назначенные мне (открытые)"
+  unread_issues_hint_counter_unread: "Назначенные задачи, которые я ещё не открывал"
+  unread_issues_hint_counter_updated: "Назначенные задачи, изменённые после моего последнего просмотра"

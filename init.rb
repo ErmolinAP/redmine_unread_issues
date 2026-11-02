@@ -5,7 +5,7 @@ Redmine::Plugin.register :redmine_unread_issues do
   description 'This is a plugin for Redmine'
   url 'https://redmine-evolution.com/our-plugins/'
   author_url 'mailto:onlycssclub@gmail.com'
-  version '1.1.0'
+  version '1.2.0'
 
   settings :default => {
     'redmine_unread_issues_date' => 'distance_of_time_in_words',
@@ -23,6 +23,7 @@ require_dependency File.dirname(__FILE__) + '/lib/redmine_unread_issues/issue_qu
 require_dependency File.dirname(__FILE__) + '/lib/redmine_unread_issues/issues_controller_patch'
 require_dependency File.dirname(__FILE__) + '/lib/redmine_unread_issues/queries_controller_patch'
 require_dependency File.dirname(__FILE__) + '/lib/redmine_unread_issues/user_patch'
+require_dependency File.dirname(__FILE__) + '/lib/redmine_unread_issues/counters'
 
 unless Issue.included_modules.include?(RedmineUnreadIssues::IssuePatch)
   Issue.send(:include, RedmineUnreadIssues::IssuePatch)

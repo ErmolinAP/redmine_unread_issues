@@ -30,3 +30,29 @@ version '1.1.0' - 03.11.2024
 Added a settings page with the following options:
 
     - Format date viewed.
+
+---------------------------------------
+
+version '1.2.0' - 02.11.2026 (fork by ErmolinAP)
+
+Counters in the top menu, similar to the build used on support.hostco.ru:
+
+- three counters right after "My page": assigned to me (green), unread (light
+  green), updated since my last view (blue). Rendered by vanilla JS from a JSON
+  payload produced server-side (lib/redmine_unread_issues/counters.rb), so it
+  does not depend on jQuery load order.
+- unread/updated markers in issue lists are now pure CSS
+  (tr.unread td.subject:before / tr.updated td.subject:before) instead of
+  JS-inserted spans, so they work even if the inline JS is blocked.
+- links of the counters open the matching filters:
+  assigned + open status, read_issue_unread=1, read_issue_updated=1.
+
+Installation notes (Redmine 6.x + Propshaft):
+
+- migrate: bundle exec rake redmine:plugins:migrate NAME=redmine_unread_issues RAILS_ENV=production
+  (the name in the commands above is wrong in the upstream README)
+- plugin CSS/JS are served from public/assets: after installing or updating run
+  bundle exec rake assets:precompile RAILS_ENV=production, otherwise
+  /assets/plugin_assets/redmine_unread_issues/*.css returns 404 and no markers
+  are visible.
+

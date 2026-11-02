@@ -1,0 +1,62 @@
+/* Счётчики в верхнем меню и точки в списках задач.
+   Форк: ErmolinAP — повторяет вид сборки support.hostco.ru. */
+
+/* --- счётчики в #top-menu --- */
+#top-menu a span.count,
+span.count {
+  background-color: #077C10;
+  padding: 0 5px 0 5px;
+  position: relative;
+  top: -1px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 7.5pt;
+  font-weight: bold;
+  margin-right: 2px;
+  color: #FFF;
+  display: inline-block;
+  line-height: 1.5;
+}
+
+#top-menu a span.count.unread {
+  background-color: #c3e26b;
+}
+
+#top-menu a span.count.updated {
+  background-color: #76a8d7;
+}
+
+#top-menu a.ui-my-assigned-issues,
+#top-menu a.ui-my-unread-issues,
+#top-menu a.ui-my-updated-issues {
+  margin-right: 3px;
+}
+
+/* --- точки в списках задач (без JS, только CSS) --- */
+tr.unread td.subject:before,
+tr.updated td.subject:before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 4px;
+  margin-bottom: -1px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+tr.unread td.subject:before {
+  background-color: #c15454;
+}
+
+tr.updated td.subject:before {
+  background-color: #5390CA;
+}
+
+/* мобильная/узкая вёрстка: счётчики не ломают шапку */
+@media screen and (max-width: 899px) {
+  #top-menu a span.count {
+    font-size: 7pt;
+    padding: 0 4px 0 4px;
+  }
+}

@@ -1,76 +1,74 @@
 <% if User.current.logged? %>
-    <script>
-        $(function () {
-            var Unrbody = $('body');
-            var clR = 'read';
-            var clU = 'unread';
-            var clUp = 'updated';
+  <%
+    counters = RedmineUnreadIssues::Counters.for(User.current)
+    payload = {
+      counters: counters,
+      urls: {
+        assigned: issues_path(set_filter: 1, f: %w[assigned_to_id status_id],
+                              op: { assigned_to_id: '=', status_id: 'o' },
+                              v: { assigned_to_id: ['me'] }),
+        unread: issues_path(set_filter: 1, f: %w[assigned_to_id read_issue_unread],
+                            op: { assigned_to_id: '=', read_issue_unread: '=' },
+                            v: { assigned_to_id: ['me'], read_issue_unread: ['1'] }),
+        updated: issues_path(set_filter: 1, f: %w[assigned_to_id read_issue_updated],
+                             op: { assigned_to_id: '=', read_issue_updated: '=' },
+                             v: { assigned_to_id: ['me'], read_issue_updated: ['1'] })
+      },
+      labels: {
+        assigned_hint: l(:unread_issues_hint_counter_assigned),
+        unread_hint: l(:unread_issues_hint_counter_unread),
+        updated_hint: l(:unread_issues_hint_counter_updated)
+      }
+    }
+  %>
+  <script>
+    window.RedmineUnreadIssues = <%= raw(payload.to_json) %>;
+  </script>
+  <script>
+    // Счётчики в верхнем меню (аналог сборки support.hostco.ru).
+    // Чистый JS: не зависит от порядка загрузки jQuery.
+    (function () {
+      function build() {
+        var data = window.RedmineUnreadIssues;
+        var menu = document.querySelector('#top-menu > ul');
+        if (!data || !menu) { return; }
+        if (menu.querySelector('a.ui-my-assigned-issues')) { return; }
 
-            function startTooltip(elem){
-                elem.tooltip({
-                    position: {
-                        my: "right-10 top",
-                        at: "right-10 bottom-20"
-                    }
-                });
-            }
+        var myPage = menu.querySelector('a.my-page');
+        var anchor = myPage ? myPage.parentNode : (menu.lastElementChild || menu);
+        if (!anchor) { return; }
 
-            function startFind(elemNew, elemFind){
-               if(elemNew.length > 0) {
-                   elemNew.each(function(){
-                       if($(this).hasClass(clU)) $(this).find(elemFind).prepend(tUnread);
-                       if($(this).hasClass(clUp)) $(this).find(elemFind).prepend(tUpdated);
-                   })
-                   startTooltip(elemNew);
-               }
-            }
+        var items = [
+          {cls: 'ui-my-assigned-issues', count: 'count',         n: data.counters.assigned, url: data.urls.assigned, hint: data.labels.assigned_hint},
+          {cls: 'ui-my-unread-issues',   count: 'count unread',  n: data.counters.unread,   url: data.urls.unread,   hint: data.labels.unread_hint},
+          {cls: 'ui-my-updated-issues',  count: 'count updated', n: data.counters.updated,  url: data.urls.updated,  hint: data.labels.updated_hint}
+        ];
 
-            function startBefore(elemBefore){
-                if(elemBefore.length > 0) {
-                    elemBefore.each(function(){
-                        if($(this).hasClass(clU)) $(this).before(tUnread);
-                        if($(this).hasClass(clUp)) $(this).before(tUpdated);
-                    })
-                    elemBefore(elemThis);
-                }
-            }
+        items.reverse().forEach(function (item) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.className = item.cls;
+          a.href = item.url;
+          a.title = item.hint;
+          a.setAttribute('aria-label', item.hint);
+          var span = document.createElement('span');
+          span.className = item.count;
+          span.textContent = item.n;
+          a.appendChild(span);
+          li.appendChild(a);
+          if (anchor.parentNode) {
+            anchor.parentNode.insertBefore(li, anchor.nextSibling);
+          } else {
+            anchor.appendChild(li);
+          }
+        });
+      }
 
-            function startThis(elemThis){
-                if(elemThis.length > 0) {
-                    elemThis.each(function(){
-                        if($(this).hasClass(clU)) $(this).prepend(tUnread);
-                        if($(this).hasClass(clUp)) $(this).prepend(tUpdated);
-                    })
-                    startTooltip(elemThis);
-                }
-            }
-
-            var tUnread = '<span class="evo-un-el evo-unread" title="<%= t('unread_issues_label_filter_unread') %>"></span>';
-            var tUpdated = '<span class="evo-un-el evo-updated" title="<%= t('unread_issues_label_filter_updated') %>"></span>';
-
-            /* -- START CALENDAR DEFAULT -- */
-            var elCal = Unrbody.find('.cal div.issue.'+ clR +', .cal div.issue.'+ clU +', .cal div.issue.'+ clUp);
-            startThis(elCal);
-
-            /* -- START ISSUE TABLES -- */
-            var listTabl = Unrbody.find('tr.'+ clR +', tr.'+ clU +', tr.'+ clUp);
-            startFind(listTabl, 'td.subject');
-
-            /* -- START DEFAULT GANTT -- */
-            var ganttEl = Unrbody.find('.gantt-table .issue');
-            startBefore(ganttEl);
-
-            /* -- START EVO PLUGINS -- */
-            var bageTime = Unrbody.find('.revo-item-list > li');
-            var bageOld = Unrbody.find('.revo-item-list > .revo-list-i');
-
-            if(bageTime.length > 0){
-                if(bageOld.length > 0){
-                    startFind(bageOld, '> a');
-                }else {
-                    startFind(bageTime, '.revo-holder-info');
-                }
-            }
-        })
-    </script>
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', build);
+      } else {
+        build();
+      }
+    })();
+  </script>
 <% end %>

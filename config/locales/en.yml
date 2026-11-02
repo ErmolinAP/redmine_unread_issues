@@ -12,3 +12,6 @@ en:
 
 
 
+  unread_issues_hint_counter_assigned: "Issues assigned to me (open)"
+  unread_issues_hint_counter_unread: "Assigned issues I have never opened"
+  unread_issues_hint_counter_updated: "Assigned issues changed since my last view"
