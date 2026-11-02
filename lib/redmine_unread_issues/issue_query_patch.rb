@@ -84,19 +84,16 @@ module RedmineUnreadIssues
         case operator
           when '=', '!'
             if value.size == 1 && (value.include?('1') || value.include?('0'))
-              if operator == '!'
-                if value.include?('1')
-                  value = ['0']
-                else
-                  value = ['1']
-                end
-              end
+              value = (value.include?('1') ? ['0'] : ['1']) if operator == '!'
+              compare = value.include?('1') ? '<' : '>'
+              # ФИКС форка: в апстриме выражение возвращалось без `in (...)` и
+              # PostgreSQL падал с «argument of AND must be type boolean, not type integer»
               " case when ( EXISTS(
                 SELECT * FROM #{ReadIssue.table_name} read_issue_ir
                   WHERE read_issue_ir.issue_id = #{Issue.table_name}.id and
                         read_issue_ir.user_id = #{User.current.id} and
-                        read_issue_ir.read_at #{value.include?('1') ? '<' : '>'} #{Issue.table_name}.updated_on)
- ) then 1 else 0 end"
+                        read_issue_ir.read_at #{compare} #{Issue.table_name}.updated_on)
+ ) then 1 else 0 end in (1)"
             else
               if operator == '!'
                 '(1=0)'
